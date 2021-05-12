@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}Новости на сайте{% endblock %}
+
+{% block body %} 
+    <div class="features">
+        <h1>Новости на сайте</h1>
+        {% if news %}
+            {% for el in news %}
+                <div class="alert alert-warning">
+                    <h3>{{ el.title }}</h3>
+                    <p>{{ el.anons }}</p>
+                    <a href="{% url 'news_detail' el.id %}" class="btn btn-warning">Читать полностью</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Ничего нет (</p>
+        {%endif%}
+
+        {# Comments #}
+    </div>
+{% endblock %}

@@ -1,0 +1,59 @@
+GROUP_ID = 201527308
+TOKEN = ''
+
+INTENTS = [
+    {
+        'name': 'Дата проведения',
+        'tokens': ('когда', 'сколько', 'дата', 'дату'),
+        'scenario': None,
+        'answer': 'Конференция будет 1 мая в 10.00'
+    },
+    {
+        'name': 'Место проведения',
+        'tokens': ('где', 'место', 'локация', 'адрес'),
+        'scenario': None,
+        'answer': 'Конференция пройдёт в зуме'
+    },
+    {
+        'name': 'Регистрация',
+        'tokens': ('регистр', 'добав'),
+        'scenario': 'registration',
+        'answer': None
+    },
+]
+
+SCENARIOS = {
+    'registration': {
+        'first_step': 'step1',
+        'steps': {
+            'step1': {
+                'text': 'Введите имя для регистрации',
+                'failure_text': 'Имя должно быть от 3 до 30 букв. Попробуйте ещё раз',
+                'handler': 'handle_name',
+                'next_step': 'step2'
+            },
+            'step2': {
+                'text': 'Введите ваш email',
+                'failure_text': 'Во введённом адресе ошибка. Попробуйте ещё раз',
+                'handler': 'handle_email',
+                'next_step': 'step3'
+            },
+            'step3': {
+                'text': 'Спасибо за регистрацию {name}. Ваш билет ниже, копию мы отправили на {email}',
+                'image': 'generate_ticket_handler',
+                'failure_text': None,
+                'handler': None,
+                'next_step': None
+            }
+        }
+    }
+}
+
+DEFAULT_ANSWER = 'Не знаю как на это ответить. Могу сказать где и когда будет конференция. Только спросите'
+
+DB_CONFIG = dict(
+    provider='postgres',
+    user='postgres',
+    host='localhost',
+    database='chat_bot'
+)
