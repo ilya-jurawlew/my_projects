@@ -1,0 +1,46 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {% block title %}{% endblock %}
+</head>
+
+<body>
+    <header class="d-flex flex-md-row p-3 mb-3 border-bottom shadow-sm">
+        {% if request.user.is_authenticated %}
+            <h4 class="mr-md-auto font-weight-normal">{% trans "Welcome to the site" %} {{ request.user.username }}</h4>
+            <a class="btn btn-outline-primary" href="{% url 'app_news:list' %}">{% trans "Home" %}</a>
+            <a class="btn btn-outline-primary" href="{% url 'app_users:logout' %}">{% trans "Exit" %}</a>
+            <a class="btn btn-outline-primary" href="{% url 'app_users:detail' user.profile.id %}">{% trans "My profile" %}</a>
+            <a class="btn btn-outline-primary" href="{% url 'app_news:create' %}">{% trans "Create News" %}</a>
+            <a class="btn btn-outline-primary" href="{% url 'app_news:many_create' %}">{% trans "Create many News" %}</a>
+        {% else %}
+            <a class="btn btn-outline-primary" href="{% url 'app_users:login' %}">{% trans "Enter" %} </a>
+            <a class="btn btn-outline-primary" href="{% url 'app_users:register' %}">{% trans "Registration" %}</a>
+        {% endif %}
+
+        <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+            <input name="text" type="hidden" value="{{ redirect_to }}">
+            <select name="language">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                    <option value="{{ language.code }}"{% if language.code ==  LANGUAGE_CODE%} selected{% endif %}>
+                        {{ language.name_local }} ({{ language.code }})
+                    </option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="{% trans 'Change' %}">
+        </form>
+    </header>
+        {% block body %}{% endblock %}
+</body>
+</html>

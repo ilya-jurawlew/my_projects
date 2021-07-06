@@ -1,0 +1,24 @@
+{% extends "app_news/base.html" %}
+{% load i18n %}
+
+
+{% block title %}
+    <title>{{ title }}</title>
+{% endblock %}
+
+{% block body %}
+    {% if news_list %}
+    <ul>
+        {% for news in news_list %}
+        <li>
+            <a href="{% url 'app_news:detail' news.id %}">{{ news.title }}</a>
+            <p><a href="">{{ news.created_at }}</a></p>
+            {% comment %} <p>{% trans "Author" %}: {{ user }} {% endcomment %}
+            <p>{{ news.content|truncatechars:100 }} </p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>{% trans "No News" %}</p>
+    {% endif %}
+{% endblock %}

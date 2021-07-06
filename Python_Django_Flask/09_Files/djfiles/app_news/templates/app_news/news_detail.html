@@ -1,0 +1,43 @@
+{% extends "app_news/base.html" %}
+{% load i18n %}
+
+
+{% block title %}
+    <title>{{ object.title }}</title>
+{% endblock %}
+
+{% block body %}
+    <h2>{{ object.title }}</h2>
+    {% for img in images %}
+        <p><img src="/media/{{ img.image }}" class="img-fluid" width="150" height="150" alt="картинка"></p>
+    {% endfor %}
+    <p> {{ object.content }} </p>
+    <p>{% trans "Created at" %}: {{ object.created_at }}</p>
+    <p><a href="{% url 'app_news:list' %}?tag={{ object.tag }}">{% trans "Tag" %}: {{ object.tag }}</a></p>
+
+    <p>{% trans "Updated at" %}: {{ object.updated_at }}</p>
+
+    <a class="btn btn-outline-primary" href="{% url 'app_news:edit' object.id%}">{% trans "Edit news" %}</a>
+
+    <h4>{% trans "Comments" %}</h4>
+    <form method="post" action="{% url 'app_news:detail' object.id %}">
+        {% csrf_token %}
+        {% if request.user.is_authenticated %}
+            <p>{% trans "User" %}: {{ request.user }}</p>
+            <p><img src="{{ user.avatar.url }}" class="img-fluid" width="50" height="50" alt="аватар"></p>
+        {% else %}
+            <p> {{ comment_form.nickname }} </p>
+        {% endif %}
+        <p> {{ comment_form.text }} </p>
+        <button type="submit">{% trans "To comment on" %}</button>
+    </form>
+
+    {% for comment in object.comments.all %}
+        {% if comment.user %}
+            <p>{% trans "Author" %}: {{ comment.user }}</p>
+        {% else %}
+            <p>{% trans "Author" %}: {{ comment.nickname }}</p>
+        {% endif %}
+        <p>{% trans "Comment" %}: {{ comment.text }}</p> <hr>
+    {% endfor %}
+{% endblock %}

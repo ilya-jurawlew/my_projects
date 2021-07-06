@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>{{ item.title }}</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="card-deck mb-3 text-center">
+     <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">{{ item.title }}</h4>
+      </div>
+      <div class="card-body">
+          <ul class="list-unstyled mt-3 mb-4">
+              <li>{{ item.parameter_1 }}</li>
+              <li>{{ item.parameter_2 }}</li>
+              <li>{{ item.parameter_3 }}</li>
+              <li>{{ item.parameter_4 }}</li>
+          </ul>
+          <p>{{ item.description }}</p>
+          <h1 class="card-title pricing-card-title">{{ item.price }} <small class="text-muted">руб.</small></h1>
+          <a href="/product/{{ item.id }}/pay" class="btn btn-lg btn-block btn-outline-primary">Купить</a>
+          <a href="/product/{{ item.id }}/del" class="btn btn-danger">Удалить</a>
+      </div>
+    </div>
+    </div>
+</div>
+{% endblock %}

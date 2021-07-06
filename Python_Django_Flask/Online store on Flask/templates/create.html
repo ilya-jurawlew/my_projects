@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Добавление товара</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <form method="post">
+        <h4>Основная информация</h4>
+        <input type="text" class="form-control" name="title" id="title" placeholder="Название"><br>
+        <input type="number" class="form-control" name="price" id="price" placeholder="Цена"><br>
+        <select class="form-control" name="category" id="category">
+            {% for category in categories %}
+                <option>{{ category }}</option>
+            {% endfor %}
+        </select>
+
+        <h4>Параметры</h4>
+        <input type="text" class="form-control" name="parameter_1" id="parameter_1" placeholder="Тип"><br>
+        <input type="text" class="form-control" name="parameter_2" id="parameter_2" placeholder="Размер панели(мм)"><br>
+        <input type="text" class="form-control" name="parameter_3" id="parameter_3" placeholder="Размер плаката(мм)"><br>
+        <input type="text" class="form-control" name="parameter_4" id="parameter_4" placeholder="Вес(кг)"><br>
+
+        <h4>Описание товара</h4>
+        <input type="text" class="form-control" name="description" id="description"><br>
+
+        <button class="btn btn-success" type="submit">Добавить товар</button>
+    </form>
+</div>
+{% endblock %}

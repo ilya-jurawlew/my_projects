@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}{{ table.title }}{% endblock %}
+
+{% block body %}
+    <div class="features">
+        <h1>{{ table.title }}</h1>
+        <p>{{ table.date }}</p>
+        <p>{{ table.text }}</p>
+        <a href="{% url 'news_delete' table.id %}" class="btn btn-danger">Удалить</a>
+        <a href="{% url 'news_update' table.id %}" class="btn btn-info">Редактировать</a>
+    </div>
+{% endblock %}

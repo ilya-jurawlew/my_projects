@@ -1,0 +1,18 @@
+{% extends "app_news/base.html" %}
+{% load i18n %}
+
+
+{% block title %}
+    <title>{{ object.id }}</title>
+{% endblock %}
+
+{% block body %}
+    {% csrf_token %}
+    <h2> {% trans "Nickname" %} - {{ user.username }}</h2>
+    <p> {% trans "Name" %} - {{ user.first_name }} </p>
+    <p> {% trans "Surname" %} - {{ user.last_name }} </p>
+    <p> {% trans "City" %} - {{ object.city }} </p> <br>
+    <p><img src="{{ object.avatar.url }}" class="img-fluid" width="150" height="150" alt="{% trans 'avatar' %}"></p>
+
+    <a class="btn btn-outline-primary" href="{% url 'app_users:edit' object.id%}">{% trans "Edit Profile" %}</a>
+{% endblock %}

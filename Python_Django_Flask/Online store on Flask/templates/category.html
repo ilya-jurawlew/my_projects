@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Производство световой рекламы</title>
+{% endblock %}
+
+{% block body %}
+    {% for category in categories %}
+        {% if category == "Световые панели" %}
+        <div class="container">
+            <div class="card-deck mb-3 text-center">
+                {% for element in items %}
+                <div class="col-md-4 shadow-sm">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">{{ element.title }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>Тип: {{ element.parameter_1 }}</li>
+                            <li>Размер внешний: {{ element.parameter_2 }} мм</li>
+                            <li>Размер плаката: {{ element.parameter_3 }} мм</li>
+                            <li>Вес: {{ element.parameter_4 }} кг</li>
+                        </ul>
+                        <h1 class="card-title pricing-card-title">{{ element.price }} <small class="text-muted">руб.</small></h1>
+                        <a href="/product/{{ element.id }}" class="btn btn-lg btn-block btn-outline-primary">Подробнее</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
