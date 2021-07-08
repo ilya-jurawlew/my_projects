@@ -1,8 +1,10 @@
 from collections import defaultdict
 
-from bowling import bowling
+from bowling import bowling_main
 
-#new_rules = __import__('03_rules')
+
+# new_rules = __import__('03_rules')
+
 
 class File:
     def __init__(self, input_file, output_file):
@@ -15,7 +17,7 @@ class File:
                 open(self.output_file, mode='w', encoding='utf8') as file_2:
             for line in file_1:
                 if 'Tour' in line:
-                    self.result = defaultdict(tuple) # очищаем словарь вначале каждого тура
+                    self.result = defaultdict(tuple)
                     file_2.write(line)
                 elif 'winner' in line:
                     for name, score in self.result.items():
@@ -32,7 +34,7 @@ class File:
                         print(f'В строке - {line} ошибка {exc}, введите только имя и результат фрейма')
                     else:
                         try:
-                            score = bowling.process_game(count)
+                            score = bowling_main.process_game(count)
                             self.result[name] += score
                         except Exception as exc:
                             print(f'Ошибка {exc} в строке {line}')

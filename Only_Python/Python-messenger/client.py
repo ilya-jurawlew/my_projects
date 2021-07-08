@@ -5,6 +5,7 @@ from PySide2.QtWidgets import QMainWindow, QApplication
 from asyncqt import QEventLoop
 from interface import Ui_MainWindow
 
+
 class ClientProtocol(asyncio.Protocol):
     transport: transports.Transport
     window: 'MainWindow'
@@ -27,8 +28,10 @@ class ClientProtocol(asyncio.Protocol):
     def connection_lost(self, exception):
         self.window.append_text("Отключено")
 
+
 class MainWindow(QMainWindow, Ui_MainWindow):
     protocol: ClientProtocol
+
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -58,12 +61,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         await asyncio.wait_for(coroutine, 1000)
 
-app = QApplication() # создаём приложение
+
+app = QApplication()
 loop = QEventLoop(app)
 asyncio.set_event_loop(loop)
 
-window = MainWindow() # создаём окно
+window = MainWindow()
 
-loop.create_task(window.start()) # подключаемся к серверу
-loop.run_forever() # запускаем бесконечный цикл (или же loop.exec_())
+loop.create_task(window.start())
+loop.run_forever()
 

@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from lesson_016.weather.models import Weather
+from Only_Python.Weather.weather.models import Weather
 
 
 class DatabaseUpdater:

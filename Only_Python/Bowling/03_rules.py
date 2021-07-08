@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Прибежал менеджер и сказал что нужно срочно изменить правила подсчета очков в игре.
-# "Выходим на внешний рынок, а там правила игры другие!" - сказал он.
-#
-# Правила подсчета очков изменяются так:
+# Правила изменились:
 #
 # Если во фрейме страйк, сумма очков за этот фрейм будет равна количеству сбитых кеглей в этом фрейме (10 кеглей)
 # плюс количество фактически сбитых кеглей за два следующих броска шара (в одном или двух фреймах,
@@ -22,32 +19,29 @@
 # То есть для игры «Х4/34» сумма очков равна 10+10 + 10+3 + 3+4 = 40,
 # а для игры «ХXX347/21» - 10+20 + 10+13 + 10+7 + 3+4 + 10+2 + 3 = 92
 
-# Необходимые изменения сделать во всех модулях. Тесты - дополнить.
 
-# "И да, старые правила должны остаться! для внутреннего рынка..." - уточнил менеджер напоследок.
-from abc import ABC, abstractmethod
 from contextlib import contextmanager
 
-from lesson_014.bowling import bowling
+from Only_Python.Bowling.bowling import bowling_main
 
 
-class GlobalFrameManager(bowling.FrameManager):
+class GlobalFrameManager(bowling_main.FrameManager):
     def __init__(self):
         super().__init__()
         self.prev_prev_throw_score = 0
         self.prev_symbol = None
         self.prev_prev_symbol = None
 
-    class FirstThrow(bowling.FrameManager.Throw):
+    class FirstThrow(bowling_main.FrameManager.Throw):
         def strike(self):
             return 10
 
         def spare(self):
-            raise bowling.UnexpectedSymbol(bowling.FrameManager.SPARE_SYMBOL)
+            raise bowling_main.UnexpectedSymbol(bowling_main.FrameManager.SPARE_SYMBOL)
 
-    class SecondThrow(bowling.FrameManager.Throw):
+    class SecondThrow(bowling_main.FrameManager.Throw):
         def strike(self):
-            raise bowling.UnexpectedSymbol(bowling.FrameManager.STRIKE_SYMBOL)
+            raise bowling_main.UnexpectedSymbol(bowling_main.FrameManager.STRIKE_SYMBOL)
 
         def spare(self):
             return 10
@@ -97,4 +91,3 @@ def process_game(input_data, total_frames=None):
             frame_manager.process(symbol)
         print(input_data, frame_manager.total_score)
         return input_data, frame_manager.total_score
-# Зачет!

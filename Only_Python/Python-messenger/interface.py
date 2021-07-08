@@ -1,13 +1,5 @@
 # -*- coding: utf-8 -*-
 
-################################################################################
-## Form generated from reading UI file 'interface.ui'
-##
-## Created by: Qt User Interface Compiler version 5.15.1
-##
-## WARNING! All changes made in this file will be lost when recompiling UI file!
-################################################################################
-
 from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
@@ -38,12 +30,9 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         QMetaObject.connectSlotsByName(MainWindow)
-    # setupUi
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.message_box.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Connecting", None))
         self.message_input.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type message", None))
         self.message_button.setText(QCoreApplication.translate("MainWindow", u"Send", None))
-    # retranslateUi
-

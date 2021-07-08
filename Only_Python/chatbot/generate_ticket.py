@@ -7,7 +7,6 @@ import requests
 from PIL import Image, ImageDraw, ImageFont
 from cairosvg import svg2png
 
-
 TEMPLATE_PATH = os.path.abspath('files/ticket_base.png/')
 FONT_PATH = os.path.abspath('files/Roboto-Regular.ttf/')
 FONT_SIZE = 20
@@ -35,17 +34,19 @@ def generate_ticket(name, email):
             avatar = Image.open(avatar_file_like)
 
             base.paste(avatar, AVATAR_OFFSET)
-        #print(response, type(response))
-        #avatar_file = BytesIO(response.content)
-        #print(avatar_file, type(avatar_file))
-        #avatar = Image.open(avatar_file)
-        #print(avatar, type(avatar))
+        # print(response, type(response))
+        # avatar_file = BytesIO(response.content)
+        # print(avatar_file, type(avatar_file))
+        # avatar = Image.open(avatar_file)
+        # print(avatar, type(avatar))
 
-        #base.paste(avatar, AVATAR_OFFSET)
+        # base.paste(avatar, AVATAR_OFFSET)
 
         temp_file = BytesIO()
         base.save(temp_file, 'png')
         temp_file.seek(0)
 
         return temp_file
+
+
 generate_ticket(name='fff', email='hhhl')

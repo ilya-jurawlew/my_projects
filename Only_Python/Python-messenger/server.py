@@ -3,7 +3,7 @@ import asyncio
 from asyncio import transports
 
 
-class ServerProtocol(asyncio.Protocol): # наследуем, чтобы не писать все методы самому, они уже есть
+class ServerProtocol(asyncio.Protocol):
     login: str = None
     server: 'Server'
     transport: transports.Transport
@@ -11,16 +11,16 @@ class ServerProtocol(asyncio.Protocol): # наследуем, чтобы не п
     def __init__(self, server: 'Server'):
         self.server = server
 
-    def data_received(self, data: bytes): # получение данных по сети
+    def data_received(self, data: bytes):
         print(data)
 
         decoded = data.decode()
 
-        if self.login is not None: # если есть логин, отправляем сообщение (отдельная функция)
+        if self.login is not None:
             self.send_messange(decoded)
-        else: # если нет логина, регистрируемся
+        else:
             if decoded.startswith('login:'):
-                self.login = decoded.replace('login:', '') # убираем логин, оставляем само имя
+                self.login = decoded.replace('login:', '')
                 for user in self.server.clients:
                     if user.login == self.login:
                         self.transport.write(f'Логин занят, попробуйте другой'.encode())
@@ -31,39 +31,39 @@ class ServerProtocol(asyncio.Protocol): # наследуем, чтобы не п
             else:
                 self.transport.write('Неверный логин\n'.encode())
 
-    def connection_made(self, transport: transports.Transport): # если всё ок
+    def connection_made(self, transport: transports.Transport):
         self.server.clients.append(self)
         self.transport = transport
 
         print('Новый клиент')
 
-    def connection_lost(self, exception): # если разрыв соединения
+    def connection_lost(self, exception):
         self.server.clients.remove(self)
 
         print('Клиент вышел')
 
-    def send_messange(self, content: str): # отправка сообщений
+    def send_messange(self, content: str):
         messange = f"{self.login}: {content}"
 
         for user in self.server.clients:
             user.transport.write(messange.encode())
 
 class Server:
-    clients: list # список клиентов
+    clients: list
 
     def __init__(self):
         self.clients = []
 
-    def build_protocol(self): # конструктор протокола
-        return ServerProtocol(self) # возвращаем новый объект
+    def build_protocol(self):
+        return ServerProtocol(self)
 
-    async def start(self): # функция запускает сервер, асинхронно
-        loop = asyncio.get_running_loop() # получаем управление событийным циклом
+    async def start(self):
+        loop = asyncio.get_running_loop()
 
-        coroutine = await loop.create_server( # асинхронная функция, внутри неё сервер
-            self.build_protocol, # конструктор протокола
-            '127.0.0.1', # ip сервера, на котором работаем
-            8888, # порт (частота, на которой находятся потоки сообщений) >1024
+        coroutine = await loop.create_server(
+            self.build_protocol,
+            '127.0.0.1',
+            8888,
         )
 
         print('Сервер запущен...')
@@ -73,12 +73,6 @@ class Server:
 process = Server()
 
 try:
-    asyncio.run(process.start()) # запускаем сервер
+    asyncio.run(process.start())
 except KeyboardInterrupt:
     print('Сервер остановлен вручную')
-
-
-
-
-
-
