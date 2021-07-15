@@ -1,0 +1,4 @@
+asyncqt==0.8.0
+PySide2==5.15.2
+shiboken2==5.15.2
+

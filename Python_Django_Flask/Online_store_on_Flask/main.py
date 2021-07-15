@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, redirect
+
 from flask_migrate import Migrate
 
 from flask_sqlalchemy import SQLAlchemy
 
 from cloudipsp import Api, Checkout
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///shop.db'

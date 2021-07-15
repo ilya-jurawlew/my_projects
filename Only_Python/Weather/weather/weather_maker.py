@@ -2,6 +2,7 @@ import re
 import bs4
 import requests
 
+
 re_date = r'(\d+)-(\d+)-(\d+)'
 re_title = r'title="(\D+)"(\W){2}img'
 re_temp_min = r'мин. <span>(\S\d+)°<'

@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from bowling import bowling_main
+from Only_Python.Bowling.bowling import bowling_main
 
 
 # new_rules = __import__('03_rules')

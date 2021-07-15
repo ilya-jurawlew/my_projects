@@ -1,0 +1,5 @@
+beautifulsoup4==4.9.3
+numpy==1.21.0
+opencv-python==4.5.3.56
+peewee==3.14.4
+soupsieve==2.2.1
