@@ -31,7 +31,9 @@ LOCAL_RULES = 'local'
 
 
 class FrameManager:
-
+    """
+    Класс обработки результатов по правилу № 1
+    """
     STRIKE_SYMBOL = 'X'
     SPARE_SYMBOL = '/'
     MISS_SYMBOL = '-'

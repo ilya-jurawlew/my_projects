@@ -7,7 +7,14 @@ from Only_Python.Bowling.bowling import bowling_main
 
 
 class File:
+    """
+    Запись результатов в файл.
+    """
     def __init__(self, input_file, output_file):
+        """
+        :param input_file: исходный файл
+        :param output_file: конечный файл
+        """
         self.input_file = input_file
         self.output_file = output_file
         self.result = defaultdict(tuple)

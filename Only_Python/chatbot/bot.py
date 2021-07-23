@@ -33,7 +33,6 @@ def configure_logging():
 class Bot:
     """
     Echo bot для  vk.com
-
     Use python 3.7
     """
 
@@ -58,8 +57,6 @@ class Bot:
 
     @db_session
     def on_event(self, event):
-        """
-        """
         if event.object.message is not None:
             user_id = event.object.message['peer_id']
             text = event.object.message['text']
@@ -69,7 +66,6 @@ class Bot:
                 self.continue_scenario(text, state, user_id)
 
             else:
-                # search intend
                 for intent in settings.INTENTS:
                     log.debug(f'User get {intent}')
                     if any(token in text.lower() for token in intent['tokens']):
@@ -123,19 +119,15 @@ class Bot:
         handler = getattr(handlers, step['handler'])
 
         if handler(text=text, context=state.context):
-            # next step
             next_step = steps[step['next_step']]
             self.send_step(next_step, user_id, text, state.context)
             if next_step['next_step']:
-                # swich to next step
                 state.step_name = step['next_step']
             else:
-                # finish scenario
                 state.delete()
                 log.debug('Зарегистрирован {name}  {email}'.format(**state.context))
                 Registration(name=state.context['name'], email=state.context['email'])
         else:
-            # retry current step
             text_to_send = step['failure_text'].format(**state.context)
             self.send_text(text_to_send, user_id)
 

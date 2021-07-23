@@ -6,7 +6,9 @@ from Only_Python.Weather.weather.database_updater import DatabaseUpdater
 
 
 class Manager:
-
+    """
+    Обработчик запросов от юзера
+    """
     def __init__(self):
         pass
 

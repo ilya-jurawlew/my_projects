@@ -10,9 +10,13 @@ re_temp_max = r'макс. <span>(\S\d+)°<'
 
 
 class WeatherMaker:
-    """Класс парсинга прогноза, результат возвращает словарь"""
+    """ Парсинг прогноза"""
 
     def __init__(self, city):
+        """
+        :param city: город поиска
+        :return: словарь прогнозов
+        """
         self.city = city
         self.result = []
 

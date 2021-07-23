@@ -4,8 +4,12 @@ import cv2
 
 
 class ImageMaker:
-    """Класс рисования открытки с прогнозом"""
+    """ Рисуем открытки с прогнозом"""
     def __init__(self, data):
+        """
+        :param data: список словарей
+        :return: итоговое изображение
+        """
         self.data = data
         self.template_file = 'python_snippets/external_data/probe.jpg'
         self.icon_sun = 'python_snippets/external_data/weather_img/sun.jpg'

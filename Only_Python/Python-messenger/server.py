@@ -48,6 +48,7 @@ class ServerProtocol(asyncio.Protocol):
         for user in self.server.clients:
             user.transport.write(messange.encode())
 
+
 class Server:
     clients: list
 
@@ -69,6 +70,7 @@ class Server:
         print('Сервер запущен...')
 
         await coroutine.serve_forever()
+
 
 process = Server()
 

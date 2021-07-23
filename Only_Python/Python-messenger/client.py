@@ -37,9 +37,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.message_button.clicked.connect(self.button)
 
-    def button(self): # перекидываем текст из маленького поля в большое
+    def button(self):
         message_text = self.message_input.description()
-        self.message_input.clear() # очищаем поле
+        self.message_input.clear()
         self.protocol.send_data(message_text)
 
     def append_text(self, connect: str):
@@ -50,7 +50,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         return self.protocol
 
     async def start(self):
-        self.show() # показываем окно
+        self.show()
         event_loop = asyncio.get_running_loop()
 
         coroutine = event_loop.create_connection(

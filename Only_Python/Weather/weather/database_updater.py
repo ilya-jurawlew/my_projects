@@ -7,6 +7,14 @@ class DatabaseUpdater:
     """добавить/получить файл в базу данных"""
 
     def __init__(self, data_for_save, date_begin, date_end):
+        """
+        :param data_for_save: данные для сохранения
+        :type data_for_save: list of dicts
+        :param date_begin: дата начала
+        :type date_begin: str
+        :param date_end: дата конца
+        :type date_end: str
+        """
         self.data_for_save = data_for_save
         self.date_begin = date_begin
         self.date_end = date_end
