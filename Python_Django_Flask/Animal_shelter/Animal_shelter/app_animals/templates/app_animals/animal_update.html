@@ -1,0 +1,14 @@
+{% extends "app_animals/base.html" %}
+
+
+{% block title %}
+    <title>Редатировать данные</title>
+{% endblock %}
+
+{% block body %}
+    <form method="post" enctype="multipart/form-data" action="{% url 'app_animals:animal_update' object.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Изменить</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "app_animals/base.html" %}
+
+
+{% block title %}
+    <title>Личный кабинет</title>
+{% endblock %}
+
+{% block body %}
+    <p>{{ object.username }}</p>
+    <p>{{ object.city }}</p>
+    <p>{{ object.phone }}</p>
+    <p>{{ object.birthday }}</p>
+    <p>{{ object.shelter.name }}</p>
+{% endblock %}

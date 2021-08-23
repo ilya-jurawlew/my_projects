@@ -1,0 +1,15 @@
+{% extends "app_animals/base.html" %}
+
+
+{% block title %}
+    <title>Животные</title>
+{% endblock %}
+
+{% block body %}
+    {% for animal in animals %}
+        <h4>{{ animal.name }}</h4>
+        <p>Возраст: {{ animal.age }}</p>
+        <p>Приют: {{ animal.shelter.name }}</p>
+        <a href="{% url 'app_animals:animal_detail' animal.id %}">Подробнее о животном</a>
+    {% endfor %}
+{% endblock %}

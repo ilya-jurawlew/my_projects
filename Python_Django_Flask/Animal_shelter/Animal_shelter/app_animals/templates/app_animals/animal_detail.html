@@ -1,0 +1,18 @@
+{% extends "app_animals/base.html" %}
+
+
+{% block title %}
+    <title>{{ object.name }}</title>
+{% endblock %}
+
+{% block body %}
+    <p>{{ object.name }}</p>
+    <p>{{ object.age }}</p>
+    <p>{{ object.date_arrival }}</p>
+    <p>{{ object.weight }}</p>
+    <p>{{ object.growth }}</p>
+    <p>{{ object.signs }}</p>
+    <p>{{ object.shelter.name }}</p>
+    <a class="btn btn-outline-primary" href="{% url 'app_animals:animal_update' object.id %}">Редактировать</a>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "app_animals/base.html" %}
+
+
+{% block title %}
+    <title>Вход</title>
+{% endblock %}
+
+{% block body %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Войти</button>
+    </form>
+{% endblock %}
