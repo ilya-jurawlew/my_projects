@@ -72,12 +72,6 @@ TEMPLATES = [
     },
 ]
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.backends.locmem.LocMemCache',
-    }
-}
-
 WSGI_APPLICATION = 'blog.wsgi.application'
 
 

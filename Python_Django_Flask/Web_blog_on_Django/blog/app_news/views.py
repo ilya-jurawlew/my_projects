@@ -6,8 +6,8 @@ from django.db.models import F
 from django.shortcuts import redirect
 from django.views import generic
 
-from Python_Django_Flask.Web_blog_on_Django.blog.app_news.forms import NewsForm, NewsFileForm, CommentsForm
-from Python_Django_Flask.Web_blog_on_Django.blog.app_news.models import News, ImagesNews
+from .forms import NewsForm, NewsFileForm, CommentsForm
+from .models import News, ImagesNews
 
 
 class NewsListView(generic.ListView):

@@ -1,6 +1,6 @@
 from django import forms
 
-from Python_Django_Flask.Web_blog_on_Django.blog.app_news.models import News, Comments
+from .models import News, Comments
 
 
 class NewsForm(forms.ModelForm):

@@ -1,8 +1,7 @@
 from django.contrib.auth.decorators import permission_required
 from django.urls import path
 
-from Python_Django_Flask.Web_blog_on_Django.blog.app_news.views import NewsListView, NewsCreateView, NewsEditView,\
-    NewsDetailView, NewsFileCreateView
+from .views import NewsListView, NewsCreateView, NewsEditView, NewsDetailView, NewsFileCreateView
 
 app_name = 'app_news'
 

@@ -21,26 +21,25 @@ class MyLogoutView(LogoutView):
     template_name = 'app_users/logout.html'
 
 
-def register_user(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            city = form.cleaned_data.get('city')
+class RegisterUser(generic.CreateView):
+    template_name = 'app_users/register.html'
+    form_class = RegisterForm
+
+    def post(self, request, *args, **kwargs):
+        form_class = RegisterForm(request.POST)
+        if form_class.is_valid():
+            user = form_class.save()
+            city = form_class.cleaned_data.get('city')
             context = {'user': user, 'city': city}
             if request.FILES.get('avatar'):
                 context['avatar'] = request.FILES.get('avatar')
             Profile.objects.create(**context)
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            first_name = form.cleaned_data.get('first_name')
-            last_name = form.cleaned_data.get('last_name')
-            user = authenticate(username=username, password=password, first_name=first_name, last_name=last_name)
+            username = form_class.cleaned_data.get('username')
+            password = form_class.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('/news')
-    else:
-        form = RegisterForm()
-    return render(request, 'app_users/register.html', {'form': form})
+        super().post(request, *args, **kwargs)
+        return redirect('app_news:list')
 
 
 def restore_password(request):

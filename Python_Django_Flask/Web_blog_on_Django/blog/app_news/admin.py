@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from Python_Django_Flask.Web_blog_on_Django.blog.app_news.models import Comments, News
+from .models import Comments, News
 
 
 class CommentsInlane(admin.TabularInline):

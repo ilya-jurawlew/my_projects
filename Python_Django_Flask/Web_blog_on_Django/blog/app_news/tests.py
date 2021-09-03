@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
 
-from Python_Django_Flask.Web_blog_on_Django.blog.app_news.models import News, Comments
+from .models import News, Comments
 
 
 TEST_USERNAME = 'test'

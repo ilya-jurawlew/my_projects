@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from Python_Django_Flask.Web_blog_on_Django.blog.app_users.models import Profile
+from .models import Profile
 
 
 class ProfileAdmin(admin.ModelAdmin):
