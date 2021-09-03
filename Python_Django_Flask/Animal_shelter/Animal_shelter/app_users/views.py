@@ -1,6 +1,6 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import login
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 
 from app_users.models import Profile
 from app_users.forms import RegisterForm
@@ -21,13 +21,14 @@ class UserDetail(generic.DetailView):
     pk_url_kwarg = 'id'
 
 
-def register_user(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
+class RegisterUser(generic.CreateView):
+    template_name = 'app_users/register.html'
+    form_class = RegisterForm
+
+    def post(self, request, *args, **kwargs):
+        form_class = RegisterForm(request.POST)
+        if form_class.is_valid():
+            user = form_class.save()
             login(request, user)
-            redirect('/animals')
-    else:
-        form = RegisterForm()
-    return render(request, 'app_users/register.html', {'form': form})
+        super().post(request, *args, **kwargs)
+        return redirect('app_animals:animal_list')

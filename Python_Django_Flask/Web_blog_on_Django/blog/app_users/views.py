@@ -9,8 +9,8 @@ from django.shortcuts import redirect, render
 from django.views import generic
 from django.utils.translation import gettext as _
 
-from Python_Django_Flask.Web_blog_on_Django.blog.app_users.models import Profile
-from Python_Django_Flask.Web_blog_on_Django.blog.app_users.forms import RegisterForm, EditRegisterForm, RestorePasswordForm
+from .models import Profile
+from .forms import RegisterForm, EditRegisterForm, RestorePasswordForm
 
 
 class MyLogin(LoginView):
