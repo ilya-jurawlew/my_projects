@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {% block title %}{% endblock %}
+</head>
+
+<body>
+    <header class="d-flex flex-md-row p-3 mb-3 border-bottom shadow-sm">
+        {% if request.user.is_authenticated %}
+            <h4 class="mr-md-auto font-weight-normal">Welcome, {{ request.user.first_name }} !</h4>
+            <a class="btn btn-outline-success" href="{% url 'app_note:list_notes' %}">My Notes</a>
+            <a class="btn btn-outline-success" href="{% url 'app_note:create_note' %}">Create Note</a>
+            <a class="btn btn-outline-success" href="{% url 'app_user:change_password' user.id %}">Change Password</a>
+        {% endif %}
+    </header>
+        {% if request.user.is_authenticated %}
+            {% block body %}{% endblock %}
+        {% else %}
+        <div class="container">
+            <div class="card-deck mb-3 text-center">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header">
+                        <h4>Hellow! For create notes you should enter or register!</h4>
+                        <a class="btn btn-outline-success btn-lg" href="{% url 'app_user:login' %}">Enter</a>
+                        <a class="btn btn-outline-success btn-lg" href="{% url 'app_user:register' %}">Registration</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+</body>
+</html>

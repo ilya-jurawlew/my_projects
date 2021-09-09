@@ -1,0 +1,25 @@
+{% extends "app_note/base_template.html" %}
+
+{% block title %}
+    <title></title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="card-header">
+                            <h4 class="my-0 font-weight-normal">{{ form.title }}</h4>
+                        </div>
+                        <p>{{ form.text }}</p>
+                        <button class="btn btn-success" type="submit">Update</button>
+                        <a href="" class="btn btn-danger">Delete</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
